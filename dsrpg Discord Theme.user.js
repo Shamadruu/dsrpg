@@ -1,4 +1,19 @@
- function addGlobalStyle(css) {
+// ==UserScript==
+// @name         DSRPG Discord-eqsue Theme
+// @namespace    https://github.com/Shamadruu
+// @version      1.0.0
+// @description  A script to change the theme of DSRPG to one akin to Discord.
+// @author       Shamadruu
+// @match        www.dsrpg.uk/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+   // var doc = (window.frames.main||false) ? (window.frames.main.document) : (document);
+
+    function addGlobalStyle(css) {
         var head, style;
         head = document.getElementsByTagName('head')[0];
         if (!head) { return; }
@@ -34,8 +49,9 @@
 	
 	addGlobalStyle('body > div > div:nth-child(2) > div.col-sm-4 > div > div::after {float: right; font-size:10px;content: "Made by Shamadruu (1097)"}');
 	
+    //doc = document.querySelector('frame[name="readsect"]').context||document.querySelector('frame[name="readsect"]').contentDocument;
     addGlobalStyle('#chatbox { background-color: #1e2124;}');
-    addGlobalStyle('#chatform *{ color:white!important;}');
+	addGlobalStyle('#chatform *{ color:white!important;}');
     addGlobalStyle('body { background-color: #1e2124!important;}');
     addGlobalStyle('#chatbox *{ background-color: #1e2124!important;}');
     addGlobalStyle('#chatdisplay { background-color: #1e2124;}');
@@ -48,3 +64,4 @@
     addGlobalStyle('::-webkit-scrollbar { width:6px; height:6px;}');
     addGlobalStyle('::-webkit-scrollbar-track { -webkig-box-shadow: inset 0 0 6px rgba(200,200,200,0.3); border-radius:10px;}');
     addGlobalStyle('::-webkit-scrollbar-thumb { border-radius: 10px; background: rgba(125,125,125,0.8);}');
+})();
