@@ -13,7 +13,6 @@
 (function() {
     'use strict';
 
-   // var doc = (window.frames.main||false) ? (window.frames.main.document) : (document);
 
     function addGlobalStyle(css) {
         var head, style;
@@ -51,7 +50,6 @@
 	
 	addGlobalStyle('body > div > div:nth-child(2) > div.col-sm-4 > div > div::after {float: right; font-size:10px;content: "Made by Shamadruu (1097)"}');
 	
-    //doc = document.querySelector('frame[name="readsect"]').context||document.querySelector('frame[name="readsect"]').contentDocument;
     addGlobalStyle('#chatbox { background-color: #1e2124;}');
 	addGlobalStyle('#chatform *{ color:white!important;}');
     addGlobalStyle('body { background-color: #1e2124!important;}');
