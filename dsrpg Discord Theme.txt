@@ -1,6 +1,4 @@
-
-
-    function addGlobalStyle(css) {
+ function addGlobalStyle(css) {
         var head, style;
         head = document.getElementsByTagName('head')[0];
         if (!head) { return; }
@@ -37,7 +35,7 @@
 	addGlobalStyle('body > div > div:nth-child(2) > div.col-sm-4 > div > div::after {float: right; font-size:10px;content: "Made by Shamadruu (1097)"}');
 	
     addGlobalStyle('#chatbox { background-color: #1e2124;}');
-	addGlobalStyle('#chatform *{ color:white!important;}');
+    addGlobalStyle('#chatform *{ color:white!important;}');
     addGlobalStyle('body { background-color: #1e2124!important;}');
     addGlobalStyle('#chatbox *{ background-color: #1e2124!important;}');
     addGlobalStyle('#chatdisplay { background-color: #1e2124;}');
