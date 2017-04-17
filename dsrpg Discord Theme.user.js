@@ -6,6 +6,8 @@
 // @author       Shamadruu
 // @match        www.dsrpg.uk/*
 // @grant        none
+// @updateURL    https://github.com/Shamadruu/dsrpg/raw/master/dsrpg%20Discord%20Theme.user.js
+// @downloadURL  https://github.com/Shamadruu/dsrpg/raw/master/dsrpg%20Discord%20Theme.user.js
 // ==/UserScript==
 
 (function() {
