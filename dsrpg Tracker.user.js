@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DSRPG Tracker
 // @namespace    https://github.com/Shamadruu
-// @version      1.0.1
+// @version      1.1.0
 // @description  A script to track various things for battling in DSRPG.
 // @author       Shamadruu
 // @match        www.dsrpg.uk/*
@@ -119,7 +119,7 @@
 			var drop = data.match(/found a \w+ full of (\w+)! \(((?:\d*,?\d*)*)\)/)||false;
 			var wst = data.match(/found a\Wn\W ((?:\w+\W?)*)\W+Weird Throwing Item\W/)||false;
 			
-			var mats = data.match(/managed to find (\d+) (?:Steel|Leather|Iron|Lead|Zinc|Nickle|Velvet|Silk|Aluminum|Silver)/) !== null ? (~~data.match(/managed to find (\d+) (?:Steel|Leather|Iron|Lead|Zinc|Nickle|Velvet|Silk|Aluminum|Silver)/)[1]) : (0);
+			var mats = data.match(/managed to find (\d+) (?:Steel|Leather|Iron|Lead|Zinc|Nickle|Velvet|Silk|Aluminum|Silver)/i) !== null ? (~~data.match(/managed to find (\d+) (?:Steel|Leather|Iron|Lead|Zinc|Nickle|Velvet|Silk|Aluminum|Silver)/i)[1]) : (0);
 			
 			
 			this.statistics.battles++;
@@ -249,7 +249,7 @@
 			table.querySelector("#drops").innerHTML = '<b>Drops:</b> ' + this.statistics.drops;
 			table.querySelector("#wst").innerHTML = '<b>WST:</b> ' + this.statistics.wst;
 			table.querySelector("#mats").innerHTML = '<b>Materials:</b> ' + this.log.mats;
-			table.querySelector("#matshr").innerHTML = '<b>Materials/hr:</b> ' + this.statistics.matshr;
+			table.querySelector("#matshr").innerHTML = '<b>Materials/hr:</b> ' + (~~this.statistics.matshr).format();
 			
 			
 			
