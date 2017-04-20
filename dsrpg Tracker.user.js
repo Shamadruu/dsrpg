@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DSRPG Tracker
 // @namespace    https://github.com/Shamadruu
-// @version      1.0.0
+// @version      1.0.1
 // @description  A script to track various things for battling in DSRPG.
 // @author       Shamadruu
 // @match        www.dsrpg.uk/*
@@ -51,7 +51,9 @@
 				
 				str : 0,
 				agi : 0,
-				end : 0
+				end : 0,
+				
+				mats: 0
 			}
 			
 			this.statistics = {
@@ -77,14 +79,16 @@
 				
 				strhr : 0,
 				agihr : 0,
-				endhr: 0
+				endhr: 0,
+				
+				matshr : 0
 			};
 			
 			this.drops = [];
 			this.wst = [];
 		};
 		Tracker.prototype.parseData = function(data) {		
-			var credits = 0;	
+			var credits = 0, mats = 0;
 			
 			var exp = data.match(/You earned ((?:\d*,?\d*)*)/) !== null ? (~~data.match(/You earned ((?:\d*,?\d*)*)/)[1].replace(/,/, "")) : (0);
 			var gexp = data.match(/You give ((?:\d*,?\d*)*) \(\d+%\) exp/) !== null ? (~~data.match(/You give ((?:\d*,?\d*)*) \(\d+%\) exp/)[1].replace(/,/, "")) : (0);
@@ -115,6 +119,7 @@
 			var drop = data.match(/found a \w+ full of (\w+)! \(((?:\d*,?\d*)*)\)/)||false;
 			var wst = data.match(/found a\Wn\W ((?:\w+\W?)*)\W+Weird Throwing Item\W/)||false;
 			
+			var mats = data.match(/managed to find (\d+) (?:Steel|Leather|Iron|Lead|Zinc|Nickle|Velvet|Silk|Aluminum|Silver)/) !== null ? (~~data.match(/managed to find (\d+) (?:Steel|Leather|Iron|Lead|Zinc|Nickle|Velvet|Silk|Aluminum|Silver)/)[1]) : (0);
 			
 			
 			this.statistics.battles++;
@@ -139,6 +144,7 @@
 				this.wst.push(wst[1]);
 			}
 			
+			
 			this.log.exp += ~~exp;
 			this.log.gexp += ~~gexp;
 			this.log.gold += ~~gold;
@@ -155,13 +161,16 @@
 			this.log.agi += agility;
 			this.log.end += endurance;
 			
+			this.log.mats += mats;
+			
 			this.update();
 		};
 		Tracker.prototype.update = function(){
 			this.time = new Date().getTime();
 			this.duration = (this.time-this.start)/(60*60*1000);
 			
-			this.statistics.ratio = this.statistics.won/this.statistics.battles;
+			this.statistics.wratio = this.statistics.won/this.statistics.battles;
+			this.statistics.lratio = this.statistics.lost/this.statistics.battles;
 			
 			this.statistics.exphr = this.log.exp/this.duration;
 			this.statistics.gexphr = this.log.gexp/this.duration;
@@ -183,6 +192,8 @@
 			this.statistics.drops = this.drops.length;
 			this.statistics.wst = this.wst.length;
 			
+			this.statistics.matshr = this.log.mats/this.duration;
+			
 			this.save();
 			this.updateHTML();
 		};
@@ -199,8 +210,8 @@
 			log.innerHTML += ('<table id="tracker"><tbody></tbody></table>');
 			var table = log.querySelector("#tracker tbody");
 			
-			table.innerHTML += ('<tr><td id="battles">Battles</td><td id="won">Won</td><td id="lost">Lost</td><td id="ratio">Ratio</td>');
-			table.innerHTML += ('<tr><td id="credits">Credits</td><td id="drops">Drop</td><td id="wst">WST</td><td>&nbsp</td>');
+			table.innerHTML += ('<tr><td id="battles">Battles</td><td id="won">Won</td><td id="lost">Lost</td><td id="credits">Credits</td></tr>');
+			table.innerHTML += ('<tr><td id="drops">Drop</td><td id="wst">WST</td><td id="mats">Mats</td><td id="matshr">Materials/hr</td></tr>');
 			table.innerHTML += ('<tr><td id="exp">Exp</td><td id="exphr">Exp/hr</td><td id="gexp">Guild Exp</td><td id="gexphr">Guild Exp/hr</td></tr>');
 			table.innerHTML += ('<tr><td id="gold">Gold</td><td id="goldhr">Gold/hr</td><td id="ggold">Guild Gold</td><td id="ggoldhr">Guild Gold/hr</td></tr>');
 			table.innerHTML += ('<tr><td id="marble">Marble</td><td id="marblehr">Marble/hr</td><td id="zircon">Zircon</td><td id="zirconhr">Zircon/hr</td>');
@@ -231,13 +242,16 @@
 		Tracker.prototype.updateHTML = function(){
 			var table = doc.querySelector("#tracker");
 			table.querySelector("#battles").innerHTML = '<b>Battles:</b> ' + this.statistics.battles.format();
-			table.querySelector("#won").innerHTML = '<b>Won:</b> ' + this.statistics.won.format();
-			table.querySelector("#lost").innerHTML = '<b>Lost:</b> ' + this.statistics.lost.format();
-			table.querySelector("#ratio").innerHTML = '<b>Ratio:</b> ' + (Math.round(this.statistics.ratio * 1000)/10) + "%";
+			table.querySelector("#won").innerHTML = '<b>Won:</b> ' + this.statistics.won.format() + " (" + (Math.round(this.statistics.wratio * 1000)/10) + "%)";
+			table.querySelector("#lost").innerHTML = '<b>Lost:</b> ' + this.statistics.lost.format() + " (" + (Math.round(this.statistics.lratio * 1000)/10) + "%)";
 			table.querySelector("#credits").innerHTML = '<b>Credits:</b> ' + this.log.credits;
+			
 			table.querySelector("#drops").innerHTML = '<b>Drops:</b> ' + this.statistics.drops;
 			table.querySelector("#wst").innerHTML = '<b>WST:</b> ' + this.statistics.wst;
-
+			table.querySelector("#mats").innerHTML = '<b>Materials:</b> ' + this.log.mats;
+			table.querySelector("#matshr").innerHTML = '<b>Materials/hr:</b> ' + this.statistics.matshr;
+			
+			
 			
 			table.querySelector("#exp").innerHTML = '<b>Exp:</b> ' + this.log.exp.format();
 			table.querySelector("#exphr").innerHTML = '<b>Exp/hr:</b> ' + (~~this.statistics.exphr).format();
@@ -313,7 +327,9 @@
 				
 				str : 0,
 				agi : 0,
-				end : 0
+				end : 0,
+				
+				mats: 0
 			}
 			
 			this.statistics = {
@@ -339,7 +355,9 @@
 				
 				strhr : 0,
 				agihr : 0,
-				endhr: 0
+				endhr: 0,
+				
+				matshr: 0
 			};
 			
 			this.drops = [];
