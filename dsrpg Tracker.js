@@ -378,4 +378,4 @@ console.log(doc);
 console.log(doc.querySelector("#outwindow"));
 var scriptE = document.createElement("script");
 scriptE.innerHTML = "(" + script + ")();";
-doc.querySelector('#outwindow').insertBefore(scriptE, doc.querySelector('#aTimerContainer'));
+//doc.querySelector('#outwindow').insertBefore(scriptE, doc.querySelector('#aTimerContainer'));
