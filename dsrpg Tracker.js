@@ -108,12 +108,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			var mats = data.match(/managed to find (\d+) (?:Steel|Leather|Iron|Lead|Zinc|Nickle|Velvet|Silk|Aluminum|Silver)/i) !== null ? (~~data.match(/managed to find (\d+) (?:Steel|Leather|Iron|Lead|Zinc|Nickle|Velvet|Silk|Aluminum|Silver)/i)[1]) : (0);
 			
 			
-			this.statistics.battles++;
+			
 			if(won){
 				this.statistics.won++;
+				this.statistics.battles++;
 			}
 			else{
 				this.statistics.lost++;
+				this.statistics.battles++;
 			}
 			if(drop){
 				this.drops.push(drop[0]);
@@ -124,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				onyx += data.match(/found a \w+ full of Onyx! \(((?:\d*,?\d*)*)\)/) !== null ? (~~data.match(/found a \w+ full of Onyx! \(((?:\d*,?\d*)*)\)/)[1]) : (0);
 				credits += data.match(/found a \w+ full of Credits! \(((?:\d*,?\d*)*)\)/) !== null ? (~~data.match(/found a \w+ full of Credits! \(((?:\d*,?\d*)*)\)/)[1]) : (0);
 				
-				console.log(this.drops);
+				//console.log(this.drops);
 			}
 			if(wst){
 				this.wst.push(wst[1]);
@@ -278,11 +280,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		Tracker.prototype.load = function(){
 			var save;
 			if(!window.localStorage.getItem("tracker")){
-				console.log("Nothing saved! \nLoading default!");
+				//console.log("Nothing saved! \nLoading default!");
 				this.save();
 			}
 			else{
-				console.log("Loading save!\n", atob(window.localStorage.getItem("tracker")));
+				//console.log("Loading save!\n", atob(window.localStorage.getItem("tracker")));
 				save = JSON.parse(atob(window.localStorage.getItem("tracker")));
 				
 				this.wst = save.wst;
@@ -375,8 +377,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	};
 		
 	var doc = (window.frames.main||false) ? (window.frames.main.document) : (document);
-	console.log(doc);
-	console.log(doc.querySelector("#outwindow"));
+	//console.log(doc);
+	//console.log(doc.querySelector("#outwindow"));
 	var scriptE = document.createElement("script");
 	scriptE.innerHTML = "(" + script + ")();";
 	doc.querySelector('#outwindow').insertBefore(scriptE, doc.querySelector('#aTimerContainer'));
