@@ -1,13 +1,11 @@
 // ==UserScript==
 // @name         DSRPG Discord-eqsue Theme
-// @namespace    https://github.com/Shamadruu
-// @version      1.0.0
-// @description  A script to change the theme of DSRPG to one akin to Discord.
-// @author       Shamadruu
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
 // @match        www.dsrpg.uk/*
 // @grant        none
-// @updateURL    https://github.com/Shamadruu/dsrpg/raw/master/dsrpg%20Discord%20Theme.user.js
-// @downloadURL  https://github.com/Shamadruu/dsrpg/raw/master/dsrpg%20Discord%20Theme.user.js
 // ==/UserScript==
 
 (function() {
@@ -46,7 +44,7 @@
 	addGlobalStyle('.arenaRow { background-color: #333; border: 0.5px solid white;}');
 	addGlobalStyle('font[color="#00688B"] { color: #0080FF!important;}');
 	addGlobalStyle('input[name="throwval[]"] { color: black!important;}');
-	addGlobalStyle('btn.btn-default.btn-xs {color: white!important;}');
+	addGlobalStyle('.btn.btn-default.btn-xs {color: white!important;}');
 	addGlobalStyle('.members_list tr:nth-child(even) { background-color:#555555}');
 	
 	addGlobalStyle('.modal-content {background-color: #666;!important;}');
@@ -55,7 +53,7 @@
 	
     //doc = document.querySelector('frame[name="readsect"]').context||document.querySelector('frame[name="readsect"]').contentDocument;
     addGlobalStyle('#chatbox { background-color: #1e2124;}');
-    addGlobalStyle('#chatform *{ color:white!important;}');
+	addGlobalStyle('#chatform *{ color:white!important;}');
     addGlobalStyle('body { background-color: #1e2124!important;}');
     addGlobalStyle('#chatbox *{ background-color: #1e2124!important;}');
     addGlobalStyle('#chatdisplay { background-color: #1e2124;}');
