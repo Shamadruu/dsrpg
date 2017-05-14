@@ -13,6 +13,7 @@
 (function() {
     'use strict';
 
+   // var doc = (window.frames.main||false) ? (window.frames.main.document) : (document);
 
     function addGlobalStyle(css) {
         var head, style;
@@ -44,14 +45,17 @@
 	addGlobalStyle('.panel-default > .panel-footer a {color: #538CEE; text-shadow: 0.5px 0.5px black;}');
 	addGlobalStyle('.arenaRow { background-color: #333; border: 0.5px solid white;}');
 	addGlobalStyle('font[color="#00688B"] { color: #0080FF!important;}');
+	addGlobalStyle('input[name="throwval[]"] { color: black!important;}');
+	addGlobalStyle('btn.btn-default.btn-xs {color: white!important;}');
 	addGlobalStyle('.members_list tr:nth-child(even) { background-color:#555555}');
 	
 	addGlobalStyle('.modal-content {background-color: #666;!important;}');
 	
 	addGlobalStyle('body > div > div:nth-child(2) > div.col-sm-4 > div > div::after {float: right; font-size:10px;content: "Made by Shamadruu (1097)"}');
 	
+    //doc = document.querySelector('frame[name="readsect"]').context||document.querySelector('frame[name="readsect"]').contentDocument;
     addGlobalStyle('#chatbox { background-color: #1e2124;}');
-	addGlobalStyle('#chatform *{ color:white!important;}');
+    addGlobalStyle('#chatform *{ color:white!important;}');
     addGlobalStyle('body { background-color: #1e2124!important;}');
     addGlobalStyle('#chatbox *{ background-color: #1e2124!important;}');
     addGlobalStyle('#chatdisplay { background-color: #1e2124;}');
