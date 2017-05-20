@@ -101,22 +101,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			
 			
 			var won = data.match(/You have been killed/) === null ? (true) : (false);
+			
+			
+			if(data.match(/You have killed/) !== null){
+				this.statistics.won++;
+				this.statistics.battles++;
+			}
+			else if(data.match(/You have been killed/) !== null){
+				this.statistics.lost++;
+				this.statistics.battles++;
+			}
+			
 			//var drop = data.match(/<b>(You found a\(n\) .*!)<\/b>/)||false;
 			var drop = data.match(/found a \w+ full of (\w+)! \(((?:\d*,?\d*)*)\)/)||false;
 			var wst = data.match(/found a\Wn\W ((?:\w+\W?)*)\W+Weird Throwing Item\W/)||false;
 			
 			var mats = data.match(/managed to find (\d+) (?:Steel|Leather|Iron|Lead|Zinc|Nickle|Velvet|Silk|Aluminum|Silver)/i) !== null ? (~~data.match(/managed to find (\d+) (?:Steel|Leather|Iron|Lead|Zinc|Nickle|Velvet|Silk|Aluminum|Silver)/i)[1]) : (0);
 			
-			
-			
-			if(won){
-				this.statistics.won++;
-				this.statistics.battles++;
-			}
-			else{
-				this.statistics.lost++;
-				this.statistics.battles++;
-			}
 			if(drop){
 				this.drops.push(drop[0]);
 				
