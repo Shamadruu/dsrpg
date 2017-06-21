@@ -33,6 +33,7 @@
     addGlobalStyle('font[color="lightgreen"] {color: green!important}'); 
     addGlobalStyle('.user_status0{ color: #538CEE;}');
     addGlobalStyle('.container > .row:nth-of-type(2) > div:nth-of-type(1):after {content: "" !important;}');
+	addGlobalStyle('input {color:black!important;');
 	
 	addGlobalStyle('.panel-heading {background-color: #1e2124!important; color: white!important; border:white!important}');
 	addGlobalStyle('.panel-body {background-color: #36393e!important;}');
