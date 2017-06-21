@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DSRPG Discord-eqsue Theme
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      1.1.0
 // @description  try to take over the world!
 // @author       You
 // @match        www.dsrpg.uk/*
