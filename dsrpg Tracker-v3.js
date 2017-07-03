@@ -361,13 +361,33 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		tracker = new Tracker();
 		tracker.init();
 			
+		function RealObserver(){
+			outwindow = doc.querySelector("#brslt");
+			//observer.disconnect();
+				var observer2 = new MutationObserver(function(mutations){
+				var data = '';
+				mutations.forEach(function(mutation){
+					mutation.addedNodes.forEach(function(node){
+						data += node.innerHTML;
+					});
+				});
+				//console.log(mutations);
+				tracker.parseData(data);
+			});
+			observer2.observe(outwindow, {childList: true, characterData : true});
+		}
+			
 		var outwindow = doc.querySelector("#outwindow");
 
 		var observer = new MutationObserver(function(mutations){
 			var data = '';
 			mutations.forEach(function(mutation){
 				mutation.addedNodes.forEach(function(node){
-					data += node.innerHTML;
+					if(node.outerHTML !== undefined){
+						if(node.outerHTML.search('brslt')>1){
+							RealObserver();
+						}
+					}
 				});
 			});
 			//console.log(mutations);
